@@ -88,6 +88,13 @@
   </main>
 
   <script>
+    class InfinityError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "InfinityError";
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -95,7 +102,17 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        num = eval(`${firstNum} ${operator} ${secondNum}`);
+        output.innerHTML = num;
+        if (!isFinite(num)) {
+          throw new InfinityError("Infinity in calculation");
+        }
+      } catch (e) {
+        throw new Error(`Error calculating: ${e}`);
+      } finally {
+        console.log(`inputs: 1st: "${firstNum}", 2nd: "${secondNum}, operation: ${operator}"`);
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
