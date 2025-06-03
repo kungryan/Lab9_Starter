@@ -185,6 +185,21 @@
       const fourth = () => { console.trace(); };
       first();
     });
+
+    errorBtns[14].addEventListener("click", () => {
+      const add = number1 + number2;
+    });
+
+    window.addEventListener("error", ()=> {
+      console.log("oh no an error :(");
+    });
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "46399f0345d64fe5b6264b6a9d6b2e16"
+      // for more configuration options, see https://docs.trackjs.com
+    });
   </script>
 </body>
 
